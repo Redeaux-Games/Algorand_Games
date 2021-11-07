@@ -2,3 +2,4 @@ node_modules
 src/examples
 .vscode
 public/games
+bin/env.js
