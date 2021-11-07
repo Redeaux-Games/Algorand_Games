@@ -1,5 +1,15 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1(class="text-center mt-3")= title
+  h2(class="text-center") Welcome to #{title}.
+  h3(class="text-center") Powered by Algorand!
+  
+
+  //- div(id="like_button_container")
+  //- Load our React component.
+  //- script(src="dist/likeButton.bundle.js")
+
+  div(id="algoAccountConnectForm")
+  script(src="dist/algoAccountConnectForm.bundle.js")
+
