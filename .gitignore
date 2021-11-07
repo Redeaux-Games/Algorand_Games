@@ -1,5 +1,5 @@
 node_modules
 src/examples
 .vscode
-public/games
+public/games/*
 bin/env.js
