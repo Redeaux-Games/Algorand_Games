@@ -9,7 +9,8 @@ module.exports = {
         // adminDash: './reactComponents/dashboard/admin.js',
         // userDash: './reactComponents/dashboard/user.js'
         // likeButton: './src/examples/like_button.js'
-        algoAccountConnectForm: './src/home/algoAccountConnectForm.js'
+        algoAccountConnectForm: './src/home/algoAccountConnectForm.js',
+        gamesComponent: './src/games/GamesComponent.js'
     },
     output: {
         filename: '[name].bundle.js',
