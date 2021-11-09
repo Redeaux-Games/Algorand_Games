@@ -1,0 +1,9 @@
+extends layout
+
+
+block content
+    h2 Games
+    ul
+        - for (var x = 0; x < games.length; x++)
+            li 
+                a(href=`${games[x]}`) #{games[x]}
