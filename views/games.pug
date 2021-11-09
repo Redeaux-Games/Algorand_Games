@@ -2,8 +2,9 @@ extends layout
 
 
 block content
-    h2 Games
-    ul
-        - for (var x = 0; x < games.length; x++)
-            li 
-                a(href=`${games[x]}`) #{games[x]}
+    div(class="text-center")
+        h2 Games
+        ul(class="list-group")
+            - for (var x = 0; x < games.length; x++)
+                li(class="list-group-item")
+                    a(href=`${games[x]}`) #{games[x]}
