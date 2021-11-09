@@ -6,7 +6,12 @@ const environment = require('../env')
 const token = {
     'X-API-Key': process.env.API_KEY
 }
-const server = 'https://testnet-algorand.api.purestake.io/ps2';
+
+const algoNet = process.env.ALGO_NET
+const server = ''
+(algoNet === 'main') ? server = 'https://mainnet-algorand.api.purestake.io/ps2' : server = 'https://testnet-algorand.api.purestake.io/ps2'
+// TODO: There are operations that require one of these servers.
+// const server = 'https://testnet-algorand.api.purestake.io/ps2';
 // const server = "https://testnet-algorand.api.purestake.io/idx2"
 const port = '';
 const client = new algosdk.Algodv2(token, server, port);
