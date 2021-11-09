@@ -71,10 +71,10 @@ class AlgoAccountConnectForm extends React.Component {
 
         let content
         if (!connected) {
+            // If not connected, make the 25 key inputs.
             const keys = []
             for(let i = 1; i <= 25; i++) {
                 let bg = ""
-                // i%2==0 ? bg = "bg-primary" : bg = "bg-info"
                 const input = (
                     <div className={"mb-2 col-12 col-md-6 col-lg-4 " + bg} key={i}>
                         <label htmlFor={"key-" + i}>Key {i}</label>
@@ -88,30 +88,37 @@ class AlgoAccountConnectForm extends React.Component {
                 )
                 keys.push(input)
             }
-            content = (
-                <form onSubmit={this.handleSubmit} id="algoAccountForm">
-                    <div className="mb-4 row">
-                        {keys}
-                    </div>
-                    <div className="text-center">
-                        <button 
-                            type="submit"
-                            className="btn btn-primary"
-                        >Connect</button>
-                    </div>
-                </form>
-            )
-        } else {
+            // The content if the user is not connected to an Algorand account.
             content = (
                 <div>
+                    <p>In order to interact with RPGGames.Fun, you must connect an Algorand account. Please enter your 25 key word password.</p>
+                    <form onSubmit={this.handleSubmit} id="algoAccountForm">
+                        <div className="mb-4 row">
+                            {keys}
+                        </div>
+                        <div className="text-center">
+                            <button 
+                                type="submit"
+                                className="btn btn-primary"
+                            >Connect</button>
+                        </div>
+                    </form>
+                </div>
+
+            )
+        } else {
+            // Content once the user is connected to an Algorand account.
+            content = (
+                <div className="text-center">
                     <p>Address: {this.state.sk.addr}</p>
+                    <p>Now that you are connected to an Algorand account, take a look at our <a href="/games">games</a>. </p>
                 </div>
             )
         }
 
         return (
             <div>
-                <h2>{this.state.heading}</h2>
+                <h2 className="text-center">{this.state.heading}</h2>
                 {this.state.error}
                 {content}
             </div>
