@@ -8,8 +8,8 @@ const token = {
 }
 
 const algoNet = process.env.ALGO_NET
-const server = ''
-(algoNet === 'main') ? server = 'https://mainnet-algorand.api.purestake.io/ps2' : server = 'https://testnet-algorand.api.purestake.io/ps2'
+let server = ''
+algoNet === 'main' ? server = 'https://mainnet-algorand.api.purestake.io/ps2' : server = 'https://testnet-algorand.api.purestake.io/ps2'
 // TODO: There are operations that require one of these servers.
 // const server = 'https://testnet-algorand.api.purestake.io/ps2';
 // const server = "https://testnet-algorand.api.purestake.io/idx2"
