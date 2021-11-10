@@ -1,5 +1,5 @@
 # v0.0.1
-
+* ignored public/dist.
 # v0.0.0
 The application allows the user to connect their Algorand account by entering their 25 key word password. 
 In order for the user to play the games, they must connect to an Algorand account. Otherwise, the user

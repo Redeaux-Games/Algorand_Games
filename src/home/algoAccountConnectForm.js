@@ -32,8 +32,6 @@ class AlgoAccountConnectForm extends React.Component {
         }
 
         const mnemonic = keys.join(' ')
-        console.log(mnemonic)
-
 
         // call the Api to check the 25 mnemonic.
         fetch('/api/connect', {
@@ -46,8 +44,6 @@ class AlgoAccountConnectForm extends React.Component {
             .then(res => {
                 // Get the response promise and turn it into json.
                 res.json().then(data => {
-                    // Console logs the data.
-                    console.log(data)
                     // Check if data includes data.error. If it does, add it as a warning before the form.
                     if (data.error) {
                         this.setState({error: <p className="bg-warning">{data.error}</p>})
@@ -62,7 +58,8 @@ class AlgoAccountConnectForm extends React.Component {
                 })
             })
             .catch(e => {
-                console.log(e)
+                // I haven't come across this error yet... it may need some work.
+                this.setState({error: <p className="bg-warning">{e.toString()}</p>})
             })
     }
 
@@ -107,6 +104,8 @@ class AlgoAccountConnectForm extends React.Component {
 
             )
         } else {
+            // The user is connected to an Algorand account.
+            
             // Content once the user is connected to an Algorand account.
             content = (
                 <div className="text-center">
