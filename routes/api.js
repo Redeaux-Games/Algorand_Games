@@ -10,13 +10,10 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/connect', function(req, res, next) {
-
   (async() => {
     // try {
       const sk = algosdk.mnemonicToSecretKey(req.body.mnemonic)
       res.json({sk: sk})
-  
-
   })().catch(e => {
     res.json({error: e.toString()})
   })
