@@ -52,7 +52,16 @@ class AlgoAccountConnectForm extends React.Component {
                     }
                 })
                 // if the localStorage(nrpgcOptedIn) is still false, send an alert
-                if(localStorage.getItem('nrpgcOptedIn') === 'false') alert("You NEED to opt in")
+                if(localStorage.getItem('nrpgcOptedIn') === 'false') {
+                    if(confirm("You are not opted in to receive the NRPG Coin. Would you like to opt in to it now? You must opt in receive the NRPG Coin to play games on RPGGames.Fun")) {
+                        console.log("You are now opting in to receive the NRPG Coin. ")
+                        // TODO: Need to make a call to the api with the sk to opt in to the coin.
+                        //fetch()
+                    } else {
+                        console.log("You MUST opt in to receive the NRPG Coin in order to play games on RPGGames.Fun.")
+                        this.setState({error: "You MUST opt in to receive the NRPG Coin in order to play games on RPGGames.Fun."})
+                    }
+                }
             })
         })
 
