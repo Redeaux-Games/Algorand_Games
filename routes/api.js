@@ -23,4 +23,8 @@ router.get('/assets/:account', AlgoMiddleWare.checkAssets, function(req, res, ne
   res.json({assets: "This is a test."})
 });
 
+router.get('/optedin/:addr', function(req, res, next) {
+  // this should be handled in the AlgoMiddleWare.optedIn
+})
+
 module.exports = router;
