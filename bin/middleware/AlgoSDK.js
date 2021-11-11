@@ -27,14 +27,15 @@ const AlgoSDK = {
             const address = req.params.account
             const account = await client.accountInformation(address).do()
             res.status(200).json({account: account})
-
           })().catch((e) => {
             console.log(e);
             res.status(500).json({error: e.toString()})
           });
-
-
         // next()
+    },
+
+    optedIn: function(req, res, next) {
+      
     }
 }
 
