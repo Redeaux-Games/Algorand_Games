@@ -19,11 +19,11 @@ router.post('/connect', function(req, res, next) {
   })
 }); 
 
-router.get('/assets/:account', AlgoMiddleWare.checkAssets, function(req, res, next) {
+router.get('/assets/:addr', AlgoMiddleWare.getAssets, function(req, res, next) {
   res.json({assets: "This is a test."})
 });
 
-router.get('/optedin/:addr', function(req, res, next) {
+router.post('/assets/:addr/opt-in/:asa', AlgoMiddleWare.asaOptIn, function(req, res, next) {
   // this should be handled in the AlgoMiddleWare.optedIn
 })
 
