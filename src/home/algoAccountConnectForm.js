@@ -24,6 +24,7 @@ class AlgoAccountConnectForm extends React.Component {
         if(localStorage.getItem('addr')) {
             let addr = localStorage.getItem('addr')
             let sk = localStorage.getItem('sk')
+            console.log(sk)
             this.setState({sk: {addr: addr, sk: sk}, connected: true, heading: "You are connected."})
         }
     }
@@ -55,8 +56,24 @@ class AlgoAccountConnectForm extends React.Component {
                 if(localStorage.getItem('nrpgcOptedIn') === 'false') {
                     if(confirm("You are not opted in to receive the NRPG Coin. Would you like to opt in to it now? You must opt in receive the NRPG Coin to play games on RPGGames.Fun")) {
                         console.log("You are now opting in to receive the NRPG Coin. ")
+                        console.log(localStorage.getItem('sk'))   
+
                         // TODO: Need to make a call to the api with the sk to opt in to the coin.
-                        //fetch()
+                        fetch(`api/assets/${localStorage.getItem('addr')}/opt-in/368678144`, {
+                            method: 'post',
+                            body: JSON.stringify({sk: localStorage.getItem('sk')}),
+                            headers: {
+                                "Content-type": "application/json"
+                            }
+                        })
+                        .then(res => {
+                            res.json().then(data => {
+                                console.log(data)
+                            })
+                        })
+                        .catch(e => {
+                            console.log(e)
+                        })
                     } else {
                         console.log("You MUST opt in to receive the NRPG Coin in order to play games on RPGGames.Fun.")
                         this.setState({error: "You MUST opt in to receive the NRPG Coin in order to play games on RPGGames.Fun."})
@@ -94,11 +111,13 @@ class AlgoAccountConnectForm extends React.Component {
                         this.setState({error: <p className="bg-warning">{data.error}</p>})
                     } else {
                         // if no error, then there is an sk object with address and sk.
-                        this.setState({sk: data.sk, connected: true, heading: "You are connected."})
+                        const skString = JSON.stringify(data.sk.sk);
+                        this.setState({sk: {addr: data.sk.addr, sk: skString}, connected: true, heading: "You are connected."})
 
                         // Save the data to the local storage.
                         localStorage.setItem('addr', data.sk.addr);
-                        localStorage.setItem('sk', data.sk.sk)
+                        
+                        localStorage.setItem('sk', skString)
                     }
                 })
             })
