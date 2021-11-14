@@ -58,7 +58,7 @@ class AlgoAccountConnectForm extends React.Component {
                         console.log("You are now opting in to receive the NRPG Coin. ")
                         console.log(localStorage.getItem('sk'))   
 
-                        // TODO: Need to make a call to the api with the sk to opt in to the coin.
+                        // Fetch the opt-in endpoint in order to opt the user into the asset. 
                         fetch(`api/assets/${localStorage.getItem('addr')}/opt-in/368678144`, {
                             method: 'post',
                             body: JSON.stringify({sk: localStorage.getItem('sk')}),
@@ -69,6 +69,16 @@ class AlgoAccountConnectForm extends React.Component {
                         .then(res => {
                             res.json().then(data => {
                                 console.log(data)
+                                // at this point, there is either a successful response or an error response.
+                                // However, I can continue to opt in to the asset b/c i'm simply sending 0 of the assets to myself. This is an issue because the account will spend .001 algo
+                                if (data.response === 'success') {
+                                    alert("You have opted in to receive the NRPG Coin on Algorand.")
+                                    localStorage.setItem('nrpgcOptedIn', 'true')
+
+                                    // refresh the component by setting this.state.optedIn to true
+                                    this.setState({optedIn: true})
+                                }
+
                             })
                         })
                         .catch(e => {
@@ -98,7 +108,8 @@ class AlgoAccountConnectForm extends React.Component {
         // call the Api to check the 25 mnemonic.
         fetch('/api/connect', {
             method: "post",
-            body: JSON.stringify({mnemonic: mnemonic}),
+            // body: JSON.stringify({mnemonic: mnemonic}),
+            body: JSON.stringify({mnemonic: "hair better exact decade fine burger expand kick lyrics sausage census toddler federal frost cluster burst diet around lunar choose control step apple abandon fold"}),
             headers: {
                 "Content-type": "application/json"
             }
@@ -143,7 +154,7 @@ class AlgoAccountConnectForm extends React.Component {
                             id={"key-" + i}
                             className="form-control"
                             type="text"
-                            required
+                            // required
                         />
                     </div>
                 )

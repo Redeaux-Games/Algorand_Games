@@ -13,7 +13,9 @@ router.post('/connect', function(req, res, next) {
   (async() => {
     // try {
       const sk = algosdk.mnemonicToSecretKey(req.body.mnemonic)
-      res.json({sk: sk})
+      // turn the sk uint8array into a string
+      // var string = new TextDecoder('utf-8').decode(sk.sk);
+      res.json({sk: {addr: sk.addr, sk: sk.sk}})
   })().catch(e => {
     res.json({error: e.toString()})
   })

@@ -80,23 +80,39 @@ const AlgoSDK = {
           const receiver = req.params.addr;
           const enc = new TextEncoder();
           const note = enc.encode("Opt in to the NRPG Coin.");
+          // This is not a clawback operation
+          let revocationTarget = undefined;
+          // CloseReaminerTo is set to undefined as
+          // we are not closing out an asset
+          let closeRemainderTo = undefined;
           let amount = 0;
           let closeout = receiver; //closeRemainderTo
           let sender = req.params.addr;
-          let txn = algosdk.makePaymentTxnWithSuggestedParams(sender, receiver, amount, undefined, note, params);
+          // let txn = algosdk.makePaymentTxnWithSuggestedParams(sender, receiver, amount, undefined, note, params);
+          let txn = algosdk.makeAssetTransferTxnWithSuggestedParams(sender, receiver,  closeRemainderTo, revocationTarget, amount, note, parseInt(req.params.asa), params);
           // WARNING! all remaining funds in the sender account above will be sent to the closeRemainderTo Account 
           // In order to keep all remaning funds in the sender account after tx, set closeout parameter to undefined.
           // For more info see: 
           // https://developer.algorand.org/docs/reference/transactions/#payment-transaction
   
           // Sign the transaction
-          const _sk = new Uint8Array(JSON.parse(req.body.sk))
+          // const _sk = new Uint8Array(JSON.parse(req.body.sk))
+          var sk = JSON.parse(req.body.sk);
+          let arr = []
+          for(let key in sk) {
+            // console.log(key)
+            arr.push(sk[key])
+          }
+          // var skarray = Uint8Array.from(sk)
+          // const _sk = Uint8Array.of(skarray)
+          const _sk = Uint8Array.from(arr)
+          let signedTxn
+          // Try to sign the transaction with the secret key. This can fail if we have the wrong key for whatever reason.
           try {
-            let signedTxn = txn.signTxn(_sk);
+            signedTxn = txn.signTxn(_sk);
           } catch (err) {
             res.status(200).json({response: err.toString()})
-            // process.exit()
-            return next()
+            return next() // This prevents the rest of the script from running and instead returns with next()
           }
 
 
@@ -115,20 +131,17 @@ const AlgoSDK = {
           var string = new TextDecoder().decode(confirmedTxn.txn.txn.note);
           console.log("Note field: ", string);
           accountInfo = await client.accountInformation(req.params.addr).do();
-          console.log("Transaction Amount: %d microAlgos", confirmedTxn.txn.txn.amt);        
-          console.log("Transaction Fee: %d microAlgos", confirmedTxn.txn.txn.fee);
-          let closeoutamt = startingAmount - confirmedTxn.txn.txn.amt - confirmedTxn.txn.txn.fee;        
-          console.log("Close To Amount: %d microAlgos", closeoutamt);
-          console.log("Account balance: %d microAlgos", accountInfo.amount);
+          // console.log("Transaction Amount: %d microAlgos", confirmedTxn.txn.txn.amt);        
+          // console.log("Transaction Fee: %d microAlgos", confirmedTxn.txn.txn.fee);
+          // let closeoutamt = startingAmount - confirmedTxn.txn.txn.amt - confirmedTxn.txn.txn.fee;        
+          // console.log("Close To Amount: %d microAlgos", closeoutamt);
+          // console.log("Account balance: %d microAlgos", accountInfo.amount);
           res.status(200).json({response: "success"})
         }
         catch (err) {
             console.log("err", err);
             res.status(200).json({response: err})
         }
-        // process.exit();
-      // })
-
       }
 }
 
