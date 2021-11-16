@@ -1,5 +1,9 @@
 # v0.0.1
 * ignored public/dist.
+* added account to localStorage on front end.
+* added checks to determine if the account is opted in to the NRPG Coin.
+* added a Dockerfile
+
 # v0.0.0
 The application allows the user to connect their Algorand account by entering their 25 key word password. 
 In order for the user to play the games, they must connect to an Algorand account. Otherwise, the user

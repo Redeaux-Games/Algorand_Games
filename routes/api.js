@@ -13,14 +13,20 @@ router.post('/connect', function(req, res, next) {
   (async() => {
     // try {
       const sk = algosdk.mnemonicToSecretKey(req.body.mnemonic)
-      res.json({sk: sk})
+      // turn the sk uint8array into a string
+      // var string = new TextDecoder('utf-8').decode(sk.sk);
+      res.json({sk: {addr: sk.addr, sk: sk.sk}})
   })().catch(e => {
     res.json({error: e.toString()})
   })
 }); 
 
-router.get('/assets/:account', AlgoMiddleWare.checkAssets, function(req, res, next) {
+router.get('/assets/:addr', AlgoMiddleWare.getAssets, function(req, res, next) {
   res.json({assets: "This is a test."})
 });
+
+router.post('/assets/:addr/opt-in/:asa', AlgoMiddleWare.asaOptIn, function(req, res, next) {
+  // this should be handled in the AlgoMiddleWare.optedIn
+})
 
 module.exports = router;
