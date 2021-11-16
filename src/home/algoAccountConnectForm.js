@@ -18,7 +18,7 @@ class AlgoAccountConnectForm extends React.Component {
 
     componentDidMount() {
         // TODO: Erase this... For testing purposes only.
-        localStorage.removeItem('nrpgcOptedIn')
+        // localStorage.removeItem('nrpgcOptedIn')
 
         // Actual code
         if(localStorage.getItem('addr')) {
@@ -109,7 +109,6 @@ class AlgoAccountConnectForm extends React.Component {
         fetch('/api/connect', {
             method: "post",
             // body: JSON.stringify({mnemonic: mnemonic}),
-            body: JSON.stringify({mnemonic: "hair better exact decade fine burger expand kick lyrics sausage census toddler federal frost cluster burst diet around lunar choose control step apple abandon fold"}),
             headers: {
                 "Content-type": "application/json"
             }
