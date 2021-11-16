@@ -1,7 +1,7 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 
-class AlgoAccountConnectForm extends React.Component {
+class AlgoAccountConnectFormComponent extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -217,5 +217,5 @@ class AlgoAccountConnectForm extends React.Component {
     }
 }
 
-let domContainer = document.querySelector('#algoAccountConnectForm')
-ReactDOM.render(<AlgoAccountConnectForm />, domContainer)
+let domContainer = document.querySelector('#algoAccountConnectFormComponent')
+ReactDOM.render(<AlgoAccountConnectFormComponent />, domContainer)
