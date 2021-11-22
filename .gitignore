@@ -4,3 +4,4 @@ src/examples
 public/games/*
 public/dist/*
 bin/env.js
+.jshintrc
