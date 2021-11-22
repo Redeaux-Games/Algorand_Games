@@ -1,5 +1,5 @@
-import * as React from 'react'
-import * as ReactDOM from 'react-dom'
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 
 class AlgoAccountConnectFormComponent extends React.Component {
     constructor(props) {

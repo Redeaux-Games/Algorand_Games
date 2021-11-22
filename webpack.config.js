@@ -11,6 +11,7 @@ module.exports = {
         // likeButton: './src/examples/like_button.js'
         // algoAccountConnectForm: './src/home/algoAccountConnectForm.js',
         algoAccountConnectFormComponent: './src/home/AlgoAccountConnectFormComponent.js',
+        AlgoSignerComponent: './src/home/AlgoSignerComponent.js',
         gamesComponent: './src/games/GamesComponent.js'
     },
     output: {
